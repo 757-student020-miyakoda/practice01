@@ -1,0 +1,11 @@
+配布等により入手したLaravelプロジェクトを動作させるためには、以下の作業が必要です。
+
+１．任意のフォルダ内にプロジェクトフォルダを配置
+２．MySQL（MariaDB）にログインし、新規データベースを作成「create database データベース名;」
+３．.envファイルの編集（存在しない場合は「.env.example」をコピーして利用）
+４．ターミナルにてプロジェクトフォルダ内に移動
+５．コマンド「composer update」を実行
+６．コマンド「php artisan key:generate」を実行
+７．コマンド「php artisan config:clear」を実行
+８．コマンド「php artisan migrate」を実行
+９．コマンド「php artisan serve」を実行し、ブラウザにて動作確認
