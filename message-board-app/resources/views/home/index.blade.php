@@ -13,8 +13,8 @@
     ちがう！ここにuseを書いて自分でひっぱってくればいいんだ 
     -->
 
-    <textarea name="content"></textarea>
-    <button>投稿する</button>
+    <p><textarea name="content"></textarea></p>
+    <p><button>投稿する</button></p>
 </form>
 
 
@@ -23,15 +23,15 @@
 <!-- // ということは投稿一覧は引数として受け取ればおｋ
 // なので普通に連想配列で渡されたキー名の変数を使う。
     // ちがう！ここにuseを書いて自分でひっぱってくればいいんだ -->
-@foreach(App\Models\Message::all() as $content)
-{{ $content->user->name }}：{{ $content->updated_at }}<br>
-{{ $content->content }}
+@foreach($messages as $message)
+{{ $message->user->name }}：{{ $message->updated_at }}<br>
+{{ $message->content }}
 <hr>
 @endforeach
 <!-- ここまで投稿一覧 -->
 
 
-<h2>ようこそ {{ auth()->user()->name }} さん！</h2>
+<!-- <h2>ようこそ {{ auth()->user()->name }} さん！</h2> -->
 <form action="{{ route('logout') }}" method="post">
     @csrf 
     <button>ログアウト</button>
