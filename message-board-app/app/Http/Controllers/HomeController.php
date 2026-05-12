@@ -8,10 +8,9 @@ class HomeController extends Controller
 {
     public function index()
     {
-        //LV40 STEP3 自分の投稿を新しい順,1ページ10個とる　P98P98
+        //LV40 STEP3 自分の投稿を新しい順,1ページ10個とる　P98
         $messages = auth()->user()->messages()->orderBy('created_at', 'desc')->paginate(10);
         return view('home.index', ['messages' => $messages]);
-
     }
 
      // STEP4オプション問題用
