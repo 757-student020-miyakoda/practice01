@@ -45,7 +45,9 @@ class MessageController extends Controller
      */
     public function edit(Message $message)
     {
-        //
+        \Gate::authorize('update',$message); //115ページ
+        //$messageには$message->id などが含まれるのでそのまま受け渡す
+        return view('message.edit',['message'=>$message]);
     }
 
     /**
@@ -53,7 +55,10 @@ class MessageController extends Controller
      */
     public function update(Request $request, Message $message)
     {
-        //
+        \Gate::authorize('update',$message); //115ページ
+        //edit.blade.phpからpostを受ける。
+        $message->update($request->all());
+        return redirect(route('home'));
     }
 
     /**
