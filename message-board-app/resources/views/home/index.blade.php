@@ -2,6 +2,10 @@
 
 @section('content')
 <h1>マイページ</h1>
+
+<!-- フラッシュメッセージの表示。バリデーション。LV50のSTEP3 -->
+@include('commons.flash')
+<!-- コレを日本語でわかりやすく表示するにはapp\Http\Requests\StoreMessageRequest.phpにmessages()メソッドを追記。 -->
 <form action="{{ route('messages.store') }}" method="POST">
     @csrf
     <!-- ここはpostでおｋ -->
