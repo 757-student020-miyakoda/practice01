@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Message;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreMessageRequest;
 
 class MessageController extends Controller
 {
@@ -12,7 +13,7 @@ class MessageController extends Controller
      */
     public function index()
     {
-        return view('message.index',["messages"=>Message::all()]);
+        return view('message.index',["messages"=>Message::orderBy('created_at', 'desc')->paginate(10)]);
     }
 
     /**
@@ -26,7 +27,10 @@ class MessageController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    // `php artisan make:request StoreMessageRequest`
+    // app/Http/Requests/StoreMessageRequest.php
+    // これを変えてる
+    public function store(StoreMessageRequest $request)
     {
         $request->user()->messages()->create($request->all());
         return redirect(route('home'));
@@ -62,9 +66,10 @@ class MessageController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Message $message)
+    public function update(StoreMessageRequest $request, Message $message)
     {
-        \Gate::authorize('update',$message); //115ページ
+        \Gate::authorize('update',$message); //115ページ「認可」
+
         //edit.blade.phpからpostを受ける。
         $message->update($request->all());
         return redirect(route('home'));
@@ -75,6 +80,8 @@ class MessageController extends Controller
      */
     public function destroy(Message $message)
     {
+        \Gate::authorize('delete',$message); //115ページ
+
         $message->delete();
         return redirect(route('home'));
     }

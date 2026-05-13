@@ -45,7 +45,18 @@ class User extends Authenticatable{
         ];
     }
 
-    public function messages(){
+    public function messages(){ //これはユーザー対メッセージ用
         return $this->hasMany(Message::class);
     }
+
+    //LV50 STEP5 だいたい126ページと131ぺーじあたり
+    public function likeMessages(){ //これはユーザー対like用。
+        return $this->belongsToMany(Message::class,'likes')->withTimestamps();
+    }
+    public function isLike($message_id){
+        return $this->likeMessages()->where('messages.id',$message_id)->exists();
+        //これは当該メッセージにこのユーザーがイイネ登録したか否かをboolで返す
+        //ちなみにこのfunctionはviews/message/messages.blade.phpから呼び出される。
+    }
+    //つぎはLikeController.phpをいじる
 }
