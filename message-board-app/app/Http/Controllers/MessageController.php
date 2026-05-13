@@ -12,7 +12,7 @@ class MessageController extends Controller
      */
     public function index()
     {
-        //
+        return view('message.index',["messages"=>Message::all()]);
     }
 
     /**
@@ -46,8 +46,17 @@ class MessageController extends Controller
     public function edit(Message $message)
     {
         \Gate::authorize('update',$message); //115ページ
+        //これを有効にするには
+        //` php artisan make:policy MessagePolicy --model Message `
+        // app/Policies/MessagePolicy.php
+        // updateメソッドに
+        // return $user->id===$message->user_id;
         //$messageには$message->id などが含まれるのでそのまま受け渡す
         return view('message.edit',['message'=>$message]);
+        //↑まだつくってなかったよ☆
+        // views/message/edit.blade.phpをつくる
+        // イイカンジに投稿フォームをつくる
+        // ただしaction先は action="{{ route('messages.update',$message) }}" のようにMessageインスタンスを忘れないこと。
     }
 
     /**

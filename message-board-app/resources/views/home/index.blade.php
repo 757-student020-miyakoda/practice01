@@ -10,7 +10,6 @@
     このformの投稿するボタンを押すと app/Http/Controllers/MessageController.php のstoreメソッドに行く。
     store() メソッドで /home (つまりこのページ)へのリダイレクトが組んである
     ということは投稿一覧は引数として受け取ればおｋ
-    ちがう！ここにuseを書いて自分でひっぱってくればいいんだ 
     -->
 
     <p><textarea name="content"></textarea></p>
@@ -20,14 +19,7 @@
 
 
 <!-- ここから投稿一覧 -->
-<!-- // ということは投稿一覧は引数として受け取ればおｋ
-// なので普通に連想配列で渡されたキー名の変数を使う。
-    // ちがう！ここにuseを書いて自分でひっぱってくればいいんだ -->
-@foreach($messages as $message)
-{{ $message->user->name }}：{{ $message->updated_at }}<br>
-{{ $message->content }}
-<hr>
-@endforeach
+@include('message.messages')
 <!-- ここまで投稿一覧 -->
 
 

@@ -9,6 +9,8 @@
     <header>
         <div class="container">
             <a class="brand" href="/">{{ config('app.name') }}</a>
+            <!-- ナビゲーションバーの設置 -->
+            @include('commons.nav')
         </div>
     </header>
     <main>
