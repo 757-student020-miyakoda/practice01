@@ -45,7 +45,7 @@ class MessageController extends Controller
      */
     public function edit(Message $message)
     {
-        return view('message.edit', ['message'=>$message]);
+        return view('messages.edit', ['message'=>$message]);
     }
 
     /**
