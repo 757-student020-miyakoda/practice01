@@ -23,9 +23,10 @@
 <!-- // ということは投稿一覧は引数として受け取ればおｋ
 // なので普通に連想配列で渡されたキー名の変数を使う。
     // ちがう！ここにuseを書いて自分でひっぱってくればいいんだ -->
-@foreach(App\Models\Message::all() as $content)
-{{ $content->user->name }}：{{ $content->updated_at }}<br>
-{{ $content->content }}
+@foreach($messages as $message)
+{{ $message->user->name }}：{{ $message->updated_at }}<br>
+{{!! nl2br(e($message->content)) !!}}
+<a href="{{ route('messages.edit', $message->id)}}">編集する</a>
 <hr>
 @endforeach
 <!-- ここまで投稿一覧 -->

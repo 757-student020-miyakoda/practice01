@@ -8,15 +8,15 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return view('home.index');
+        $messages = auth()->user()->messages()->orderBy('created_at', 'desc')->paginate(10);
+        return view('home.index', ['messages' => $messages]);
     }
 
      // STEP4オプション問題用
     // プロフィール編集画面
     public function edit()
     {
-        $user = auth()->user();
-        return view('home.edit', ['user' => $user]);
+
     }
 
     // STEP4オプション問題用
